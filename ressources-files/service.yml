@@ -1,0 +1,23 @@
+apiVersion: v1 # la version de l'api  
+kind: Service # le type de ressource
+metadata: # les meta données de la ressource
+  name: mon-site-web-service
+spec:
+  selector: # on selectionne le label du deployement (ils doivent corressondre avec ceux des pods)
+    app: mon-site-web
+  type: LoadBalancer # on def le type de service
+  ports: # on defini le port forwarding (port -> targetPort)
+  - port: 80
+    targetPort: 80
+
+# commande
+# service, deployement, 5, pods
+# kubectl apply - f .\ressources-files\deployment.yml, .\ressources-files\service.yml
+# Pour voir toutes les ressources dans le cluster:
+# kubectl get all
+
+#Pour appliquer les fichiers de ressources:
+#kubectl apply -f .\ressources-files\service.yml,.\ressources-files\deployment.yml
+
+#Pour retirer les fichiers de ressources:
+#kubectl delete -f .\ressources-files\service.yml,.\ressources-files\deployment.yml

@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+# on specifie la version de l'api que l'on va utiliser pour notre fichier de deploiement
+
+kind: Deployment
+# on spécifie quel type de ressource on est en train de creer
+
+metadata:
+  name: mon-site-web-deployment
+  # on spécifie via les meta-données ke nom qu'aura notre déploiement dans le cluster
+
+spec: # On defini ensuite les spécificités du / des pods 
+  replicas: 5 # On peut directement cibler le nombre de réplique de notre pod que l'on veut
+  selector:
+    matchLabels:
+      app: mon-site-web
+  template:
+    metadata: 
+      labels: # Dans les labels on peut definir autant d'ensemble cle : valeur que l'on veut
+        app: mon-site-web
+    spec:
+      containers: # On defini ensuite les conteneurs de notre pod
+        - name: mon-site-web # on donne le nom du conteneur
+          image: 0811198720119005/exo-nginx # on specifie l'image du conteneur
+          resources: # On specifie les ressources 
+            limits: # On fixe les limites
+              memory: "128Mi" # De RAM
+              cpu: "500m" # De temps d'utilisation du processeur
+          ports: # On défini les ports utilisés par le conteneur
+            - containerPort: 80
+
+
